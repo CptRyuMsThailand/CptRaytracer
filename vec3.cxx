@@ -28,8 +28,8 @@ class vec3{
 		}
 	vec3 operator * (const vec3 &that) const{
 		return vec3(this->x * that.x,
-		this->y - that.y,
-		this->z - that.z);
+		this->y * that.y,
+		this->z * that.z);
 	}
 	vec3 operator * (const double &that) const{
 		return vec3(this->x * that,this->y * that,this->z * that);
@@ -74,7 +74,7 @@ double &t,double &u,double &v){
 	vec3 v0v2 = v2 - v0;
 	vec3 pvec = rd.cross(v0v2);
 	double det = v0v1.dot(pvec);
-	if(abs(det) < kEpsilon)return false;
+	if(abs(det )< kEpsilon)return false;
 	double invDet = 1.0/det;
 	vec3 tvec = ro - v0;
 	u = tvec.dot(pvec) * invDet;
