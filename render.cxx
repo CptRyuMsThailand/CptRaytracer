@@ -82,6 +82,8 @@ const vector<vec3> &vert,const Option &options,int depth){
 		vec3 indirL (0);
 		vec3 phit = ro+rd*tNear;
 		vec3 norm(0.0);
+		vec3 objAlbeido = objects[hitObject].albeido;
+		
 		objects[hitObject].surfaceProperty(norm,vert);
 		vec3 toLight = lightpos-phit;
 		toLight.normalize();
@@ -110,7 +112,7 @@ uniform_real_distribution<double> distribution(0.0,1.0);
 	    	indirL = indirL+(castRay(phit+sampW*options.bias,sampW,objects,vert,options,depth-1)*r1);
 	    }
 	    indirL = indirL*(1.0/(N));
-	    hitColor = ((directL)+(indirL))*(objects[hitObject].albeido);
+	    hitColor = ((directL)+(indirL))*(objAlbeido);
 	}else{
 		hitColor =0.4;//options.bgColor * sky(ro,rd);
 	}
